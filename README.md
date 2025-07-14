@@ -41,22 +41,6 @@ Planned and upcoming features:
 - 🌐 Cross-platform build support and install script
 - 📁 Encrypted vault backup with versioning
 
----
-
-## 📂 Folder Structure
-
-SecureVault+/
-├── aes.c/h # Encryption logic
-├── auth.c/h # Login and master password auth
-├── config.h # Centralized constants
-├── main.c # Entry point / CLI
-├── recovery.c/h # Recovery mechanisms
-├── utils.c/h # Cross-platform utilities
-├── vault.c/h # Vault logic (add/view/export/import)
-├── vault_struct.h # Credential struct definition
-├── .gitignore # Ignore sensitive .dat files
-├── README.md # Project documentation
-
 
 ---
 
