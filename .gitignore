@@ -1,0 +1,13 @@
+# Ignore compiled files
+*.o
+*.exe
+
+# Ignore data & vault files
+*.dat
+vault.dat
+salt.dat
+master.dat
+recovery_salt.dat
+security.dat
+vault.bak
+reset_note_shown.flag
