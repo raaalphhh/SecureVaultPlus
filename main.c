@@ -4,7 +4,9 @@
 #include "auth.h"
 #include "vault.h"
 #include "config.h"
-#include "recovery.h" // Make sure to include this
+#include "recovery.h" 
+#include "vault_struct.h"  
+void deleteCredentialBySite(const char *site);  // function prototype
 
 #define INPUT_LEN 100
 
@@ -60,7 +62,8 @@ int main()
                     printf("[2] View Credentials\n");
                     printf("[3] Export Vault\n");
                     printf("[4] Import Vault\n");
-                    printf("[5] Logout\n");
+                    printf("[5] Delete Credential\n");
+                    printf("[6] Logout\n");
                     printf(">> Choose an option: ");
                     fgets(vaultInput, sizeof(vaultInput), stdin);
                     vaultInput[strcspn(vaultInput, "\n")] = '\0'; // Remove newline
@@ -82,6 +85,14 @@ int main()
                         importVault();
                     }
                     else if (strcmp(vaultInput, "5") == 0)
+                    {
+                        char site[100];
+                        printf("Enter site to delete: ");
+                        fgets(site, sizeof(site), stdin);
+                        site[strcspn(site, "\n")] = 0;
+                        deleteCredentialBySite(site);
+                    }
+                    else if (strcmp(vaultInput, "6") == 0)
                     {
                         printf("Logging out...\n");
                         break;

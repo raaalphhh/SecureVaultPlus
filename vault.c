@@ -129,3 +129,36 @@ void importVault()
     fclose(dst);
     printf("[INFO] Vault imported from '%s'.\n", BACKUP_FILE);
 }
+
+// Delete credential by site name
+void deleteCredentialBySite(const char *site) {
+    Credential c;
+    int found = 0;
+
+    FILE *fp = fopen(VAULT_FILE, "rb");
+    FILE *temp = fopen("vault_temp.dat", "wb");
+
+    if (!fp || !temp) {
+        printf("[ERROR] Couldn't open vault for deleting.\n");
+        if (fp) fclose(fp);
+        if (temp) fclose(temp);
+        return;
+    }
+
+    while (fread(&c, sizeof(Credential), 1, fp) == 1) {
+        if (strcmp(c.site, site) == 0) {
+            printf("[INFO] Deleted: %s\n", site);
+            found = 1;
+            continue;
+        }
+        fwrite(&c, sizeof(Credential), 1, temp);
+    }
+
+    fclose(fp);
+    fclose(temp);
+
+    remove(VAULT_FILE);
+    rename("vault_temp.dat", VAULT_FILE);
+
+    if (!found) printf("[INFO] No credential found for site: %s\n", site);
+}
